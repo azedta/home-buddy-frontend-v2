@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* Optional: global smoothing */
+:root {
+    color-scheme: light;
+}
+
+html, body, #root {
+    height: 100%;
+    min-height: 100%;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Hide scrollbar but keep scrolling (works on Windows/Chrome too) */
+.scrollbar-hidden {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE/Edge legacy */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+}
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}
+.scrollbar-hidden::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+/* float animations */
+@keyframes floatY {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes floatYSoft {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+.animate-float-1 { animation: floatY 4.8s ease-in-out infinite; animation-delay: -1.2s; }
+.animate-float-2 { animation: floatYSoft 4.2s ease-in-out infinite; animation-delay: -3.1s; }
+.animate-float-3 { animation: floatY 5.4s ease-in-out infinite; animation-delay: -4.7s; }
+.animate-float-4 { animation: floatYSoft 4.6s ease-in-out infinite; animation-delay: -2.0s; }
+.animate-float-5 { animation: floatY 6.0s ease-in-out infinite; animation-delay: -6.3s; }
+
+@keyframes floatXY {
+    0%, 100% { transform: translate(0px, 0px); }
+    50% { transform: translate(4px, -8px); }
+}
+.animate-float-xy {
+    animation: floatXY 5.2s ease-in-out infinite;
+    animation-delay: -2.4s;
+}
+
+@keyframes floatXYSoft {
+    0%, 100% { transform: translate(0px, 0px); }
+    50% { transform: translate(2px, -6px); }
+}
+.animate-float-xy-soft {
+    animation: floatXYSoft 4.6s ease-in-out infinite;
+    animation-delay: -1.9s;
+}
+
+@keyframes scrollHint {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(4px); opacity: 1; }
+}
+.animate-scrollHint {
+    animation: scrollHint 1.8s ease-in-out infinite;
+}
