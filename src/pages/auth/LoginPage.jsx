@@ -6,6 +6,10 @@ import { signin } from "../../features/authApi.js";
 import { validateLogin } from "../../features/authValidation.js";
 import { normalizeAuthError } from "../../features/authErrors.js";
 import { useNavigate, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useAuthStore } from "../../features/authStore";
+
+
 
 
 /* ---------- helpers ---------- */
@@ -151,6 +155,8 @@ export default function LoginPage() {
     const [showPw, setShowPw] = useState(false);
     const [rememberMe, setRememberMe] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const setUser = useAuthStore((s) => s.setUser);
 
 
     const errors = useMemo(() => validateLogin(values), [values]);
@@ -183,8 +189,7 @@ export default function LoginPage() {
             const data = await signin({
                 username: values.username.trim(),
                 password: values.password,
-            });
-
+            }); // :contentReference[oaicite:1]{index=1}
 
             // Extract actual JWT value from cookie-like string
             const token = extractToken(data.jwtToken);
@@ -193,25 +198,38 @@ export default function LoginPage() {
                 id: data.id,
                 fullname: data.fullname,
                 username: data.username,
+                email: data.email,              // ✅ include email (if backend returns it)
                 roles: data.roles || [],
                 token,
-                rawJwtToken: data.jwtToken, // keep if you want debugging
+                rawJwtToken: data.jwtToken,     // keep if you want debugging
             };
 
+            // Persist based on rememberMe
             if (rememberMe) {
                 localStorage.setItem("homebuddy_auth", JSON.stringify(auth));
             } else {
                 sessionStorage.setItem("homebuddy_auth", JSON.stringify(auth));
+                // Optional: keep localStorage clean when user chooses session only
+                localStorage.removeItem("homebuddy_auth");
             }
 
-            setSuccessMsg(`Welcome back, ${data.fullname || data.username}! Redirecting...`);
+            // Sync Zustand store so Topbar / Sidebar update immediately
+            setUser(auth); // :contentReference[oaicite:2]{index=2}
 
+            // In case any component listens to this custom event
+            window.dispatchEvent(new Event("hb-auth-updated"));
+
+            setSuccessMsg(`Welcome back, ${auth.fullname || auth.username}! Redirecting...`);
+
+            // Redirect to originally requested page, else dashboard
+            const from = location.state?.from || "/dashboard";
+
+            // Keep your micro-delay for UX polish
             setTimeout(() => {
-                navigate("/dashboard"); // or "/dashboard" when you add it
+                navigate(from, { replace: true });
             }, 650);
 
         } catch (err) {
-            // Use your normalizer if you have it, otherwise fallback.
             const normalized =
                 typeof normalizeAuthError === "function"
                     ? normalizeAuthError(err)
@@ -229,6 +247,7 @@ export default function LoginPage() {
             setLoading(false);
         }
     }
+
 
     return (
         <div className="min-h-screen w-full overflow-auto md:h-screen md:overflow-hidden bg-slate-50">
