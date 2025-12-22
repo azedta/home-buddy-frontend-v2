@@ -1,29 +1,42 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignupPage from "../pages/auth/SignupPage.jsx";
-import LoginPage from "../pages/auth/LoginPage.jsx";
+import ProtectedRoute from "./ProtectedRoute";
 
-import DashboardLayout from "../components/DashboardLayout.jsx";
+import SignupPage from "../pages/auth/SignupPage";
+import LoginPage from "../pages/auth/LoginPage";
+import DashboardLayout from "../components/DashboardLayout";
+
 import RobotPage from "../pages/dashboard/RobotPage";
+import RobotActivityPage from "../pages/robot/RobotActivityPage";
 import MedicationPage from "../pages/dashboard/MedicationPage";
 import NotificationsPage from "../pages/dashboard/NotificationsPage";
 import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
 import SettingsPage from "../pages/dashboard/SettingsPage";
 
 export const router = createBrowserRouter([
+    // ✅ public
     { path: "/", element: <SignupPage /> },
     { path: "/signup", element: <SignupPage /> },
     { path: "/login", element: <LoginPage /> },
 
+    // 🔒 everything below requires login
     {
-        path: "/dashboard",
-        element: <DashboardLayout />,
+        element: <ProtectedRoute />,
         children: [
-            { index: true, element: <RobotPage /> },
-            { path: "robot", element: <RobotPage /> },
-            { path: "medication", element: <MedicationPage /> },
-            { path: "notifications", element: <NotificationsPage /> },
-            { path: "analytics", element: <AnalyticsPage /> },
-            { path: "settings", element: <SettingsPage /> },
+            {
+                path: "/dashboard",
+                element: <DashboardLayout />,
+                children: [
+                    { index: true, element: <RobotPage /> },
+
+                    { path: "robot", element: <RobotPage /> },
+                    { path: "robot/activity", element: <RobotActivityPage /> },
+
+                    { path: "medication", element: <MedicationPage /> },
+                    { path: "notifications", element: <NotificationsPage /> },
+                    { path: "analytics", element: <AnalyticsPage /> },
+                    { path: "settings", element: <SettingsPage /> },
+                ],
+            },
         ],
     },
 ]);
