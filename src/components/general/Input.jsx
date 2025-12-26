@@ -1,4 +1,4 @@
-import FieldError from "./FieldError";
+import FieldError from "./FieldError.jsx";
 
 export default function Input({
                                   label,

@@ -3,18 +3,18 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import SignupPage from "../pages/auth/SignupPage";
 import LoginPage from "../pages/auth/LoginPage";
-import DashboardLayout from "../components/DashboardLayout";
+import DashboardLayout from "../components/dashboard/DashboardLayout.jsx";
 
-import RobotPage from "../pages/dashboard/RobotPage";
+import RobotPage from "../pages/dashboard/RobotPage.jsx";
 import RobotActivityPage from "../pages/robot/RobotActivityPage";
-import MedicationPage from "../pages/dashboard/MedicationPage";
+import MedicationPage from "../pages/dashboard/MedicationPage.jsx";
 import NotificationsPage from "../pages/dashboard/NotificationsPage";
 import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
 import SettingsPage from "../pages/dashboard/SettingsPage";
 
 export const router = createBrowserRouter([
     // ✅ public
-    { path: "/", element: <SignupPage /> },
+    { path: "/", element: <LoginPage /> },
     { path: "/signup", element: <SignupPage /> },
     { path: "/login", element: <LoginPage /> },
 

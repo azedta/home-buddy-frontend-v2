@@ -9,3 +9,8 @@ export async function signin(payload) {
     const res = await api.post("/api/auth/signin", payload);
     return res.data;
 }
+
+export async function signout() {
+    const res = await api.post("/api/auth/signout", null, { withCredentials: true });
+    return res.data;
+}

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import Input from "../../components/Input.jsx";
-import Button from "../../components/Button.jsx";
-import Alert from "../../components/Alert.jsx";
+import Input from "../../components/general/Input.jsx";
+import Button from "../../components/general/Button.jsx";
+import Alert from "../../components/general/Alert.jsx";
 import { validateSignup } from "../../features/authValidation.js";
 import { signup } from "../../features/authApi.js";
 import { normalizeAuthError } from "../../features/authErrors.js";
