@@ -5,12 +5,15 @@ import SignupPage from "../pages/auth/SignupPage";
 import LoginPage from "../pages/auth/LoginPage";
 import DashboardLayout from "../components/dashboard/DashboardLayout.jsx";
 
-import RobotPage from "../pages/dashboard/RobotPage.jsx";
+import {RobotPage} from "../pages/dashboard/RobotPage.jsx";
 import RobotActivityPage from "../pages/robot/RobotActivityPage";
 import MedicationPage from "../pages/dashboard/MedicationPage.jsx";
 import NotificationsPage from "../pages/dashboard/NotificationsPage";
-import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
 import SettingsPage from "../pages/dashboard/SettingsPage";
+import DosesSchedulesPage from "../pages/dashboard/DosesSchedulesPage.jsx";
+import ElderlyMedicationView from "../pages/medication/ElderlyMedicationView.jsx";
+
+
 
 export const router = createBrowserRouter([
     // ✅ public
@@ -27,13 +30,11 @@ export const router = createBrowserRouter([
                 element: <DashboardLayout />,
                 children: [
                     { index: true, element: <RobotPage /> },
-
                     { path: "robot", element: <RobotPage /> },
                     { path: "robot/activity", element: <RobotActivityPage /> },
-
                     { path: "medication", element: <MedicationPage /> },
+                    { path: "doses", element: <DosesSchedulesPage /> },
                     { path: "notifications", element: <NotificationsPage /> },
-                    { path: "analytics", element: <AnalyticsPage /> },
                     { path: "settings", element: <SettingsPage /> },
                 ],
             },
