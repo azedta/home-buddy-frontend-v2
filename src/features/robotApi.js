@@ -1,56 +1,76 @@
-function getAuthToken() {
-    try {
-        const fromLocal = localStorage.getItem("homebuddy_auth");
-        const fromSession = sessionStorage.getItem("homebuddy_auth");
-        const raw = fromLocal || fromSession;
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        return parsed?.token || null;
-    } catch {
-        return null;
-    }
+import { api } from "../utils/axios";
+
+/* ---------------------------------------------
+   ROBOT LOOKUP
+--------------------------------------------- */
+
+// Admin / Caregiver → list all robots
+export async function getRobots() {
+    const res = await api.get("/api/robot", { withCredentials: true });
+    return res.data;
 }
 
-async function fetchWithAuth(url, options = {}) {
-    const token = getAuthToken();
-    const headers = {
-        "Content-Type": "application/json",
-        ...(options.headers || {}),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    };
-
-    const res = await fetch(url, { ...options, headers });
-    if (!res.ok) {
-        let msg = `Request failed (${res.status})`;
-        try {
-            const data = await res.json();
-            msg = data?.message || data?.error || msg;
-        } catch {
-            // ignore
-        }
-        throw new Error(msg);
-    }
-    if (res.status === 204) return null;
-    return res.json();
-}
-
-const BASE = "/api/v2/robot";
-
-export function getRobotStatus() {
-    return fetchWithAuth(`${BASE}/status`);
-}
-
-export function getRobotActivities(limit = 50) {
-    return fetchWithAuth(`${BASE}/activities?limit=${encodeURIComponent(limit)}`);
-}
-
-export function getRobotCommands(limit = 15) {
-    return fetchWithAuth(`${BASE}/commands?limit=${encodeURIComponent(limit)}`);
-}
-
-export function issueRobotCommand({ commandType, targetLocation, description }) {
-    return fetchWithAuth(`${BASE}/commands`, {
-        method: "POST",
-        body: JSON.stringify({ commandType, targetLocation, description }),
+// Elderly user → backend resolves robot by userId
+export async function getRobotStatusByUser(userId) {
+    const res = await api.get(`/api/robot/by-user/${userId}/status`, {
+        withCredentials: true,
     });
+    return res.data;
 }
+
+// Admin / Caregiver → explicit robotId
+export async function getRobotStatus(robotId) {
+    const res = await api.get(`/api/robot/${robotId}/status`, {
+        withCredentials: true,
+    });
+    return res.data;
+}
+
+// Admin / Caregiver → resolve robot by assisted user's username
+export async function getRobotStatusByUsername(userName) {
+    const u = encodeURIComponent(String(userName || "").trim());
+    const res = await api.get(`/api/robot/by-username/${u}/status`, {
+        withCredentials: true,
+    });
+    return res.data;
+}
+
+
+/* ---------------------------------------------
+   ACTIVITIES & COMMANDS
+--------------------------------------------- */
+
+export async function getRobotActivities(robotId, limit = 50) {
+    const res = await api.get(`/api/robot/${robotId}/activities`, {
+        params: { limit },
+        withCredentials: true,
+    });
+    return res.data;
+}
+
+export async function getRobotCommands(robotId, limit = 15) {
+    const res = await api.get(`/api/robot/${robotId}/commands`, {
+        params: { limit },
+        withCredentials: true,
+    });
+    return res.data;
+}
+
+/* ---------------------------------------------
+   COMMAND ISSUING
+--------------------------------------------- */
+
+export async function issueRobotCommand(robotId, payload) {
+    const rid = encodeURIComponent(robotId);
+    const res = await api.post(
+        `/api/robot/${rid}/commands`,
+        {
+            commandType: payload.commandType,
+            targetLocation: payload.targetLocation ?? null,
+            description: payload.description ?? null,
+        },
+        { withCredentials: true }
+    );
+    return res.data;
+}
+
