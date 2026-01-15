@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../features/authStore.js";
 import { signout } from "../../features/authApi";
 
+const message = "Your home assistant is active and monitoring.";
 
 function getGreetingLine() {
     const h = new Date().getHours();
-    if (h < 12) return { greet: "Good morning", sub: "Let’s keep things smooth and on-track." };
-    if (h < 18) return { greet: "Good afternoon", sub: "Ready for a clean, productive session?" };
-    return { greet: "Good evening", sub: "Let’s wrap up strong — small wins count." };
+    if (h < 12) return { greet: "Good morning", sub: message };
+    if (h < 18) return { greet: "Good afternoon", sub: message };
+    return { greet: "Good evening", sub: message };
 }
 
 export default function Topbar({ onOpenSidebar }) {
@@ -111,7 +112,7 @@ export default function Topbar({ onOpenSidebar }) {
 
                             <div className="p-2">
                                 <Link
-                                    to="/notifications"
+                                    to="/dashboard/notifications"
                                     onClick={() => setOpen(false)}
                                     className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition"
                                     role="menuitem"
@@ -126,7 +127,7 @@ export default function Topbar({ onOpenSidebar }) {
                                 </Link>
 
                                 <Link
-                                    to="/settings"
+                                    to="/dashboard/settings"
                                     onClick={() => setOpen(false)}
                                     className="mt-1 flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition"
                                     role="menuitem"
