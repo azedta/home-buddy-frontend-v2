@@ -1,16 +1,154 @@
-# React + Vite
+# 🤖 HomeBuddy — Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **production‑grade frontend application** for a home assistant robot platform, designed with **clarity, reliability, and human‑centric UX** at its core.
 
-Currently, two official plugins are available:
+This repository focuses on the **frontend system** — the user interface layer that connects people to a real, live robotic and healthcare‑oriented platform.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application is fully deployed and can be explored live.
 
-## React Compiler
+🌐 **Live Demo:** https://home-buddy-v2.vercel.app/                                           
+🧠 **Backend API:** https://github.com/azedta/home-buddy-v2
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🌟 Frontend Vision
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+HomeBuddy’s frontend is designed around three real user contexts:
+
+- 👵 **Elderly users** who need calm visuals, large touch targets, and confidence in every action  
+- 👨‍⚕️ **Caregivers & administrators** who need visibility, control, and predictable workflows  
+- 🤖 **A physical robot system**, where UI decisions must reflect real‑world behavior  
+
+Every screen, component, and interaction is intentional and purpose‑driven.
+
+---
+
+## 🧠 Design Philosophy
+
+- **Calm interfaces** → soft color palettes, low visual noise, stable layouts  
+- **Predictable interactions** → consistent spacing, familiar patterns, no surprises  
+- **Accessibility‑aware UI** → readable typography, forgiving interactions, clear feedback  
+- **Human‑centered language** → friendly wording over technical jargon  
+
+The goal is not visual flash — it is **clarity, trust, and usability**.
+
+---
+
+## 🧩 Major Frontend Modules
+
+### 🔐 Authentication (Login & Signup)
+- Clean, reassuring authentication flows
+- Real‑time validation with clear feedback
+- Password strength guidance during signup
+- Session‑aware and persistent login handling
+- Calm success and error messaging
+
+---
+
+### 💊 Medication Management
+A core part of the application’s frontend experience.
+
+- Clear separation between **Elderly** and **Admin/Caregiver** views
+- UI structured around real medication routines
+- Emphasis on readability and reassurance
+- Card‑based layouts designed to reduce cognitive load
+
+---
+
+### 🕒 Dose Scheduling & Daily Planning
+- Day‑based planners instead of dense timelines
+- Window‑based schedules for better comprehension
+- Visual rhythm (morning / afternoon / night)
+- Status changes that are deliberate and explicit
+
+---
+
+### 🤖 Robot & Dispenser Awareness
+- Status cards designed to inform without alarming
+- Clear indicators for battery, tray, docking, and dispenser state
+- Visual metaphors instead of raw technical data
+- Companion‑like presentation rather than machine‑centric UI
+
+---
+
+### 🔔 Notifications Center
+A complete **frontend notification inbox**, not a simple alert system.
+
+- Severity‑aware visuals (critical, warning, info, success)
+- Clear, human‑friendly titles and messages
+- Admin view across multiple users
+- Filtering, pagination, and search
+- Expandable details with optional technical transparency
+
+---
+
+## 📸 Screenshots & UI Flows
+
+> Screenshots below demonstrate real application flows and interaction patterns.
+
+### 🧭 Authentication Flow
+- Calm welcome screen
+- Login with gentle validation feedback
+- Signup with password strength guidance
+
+---
+
+### 🏠 Dashboard Experience
+- Modular card‑based layout
+- Clear information grouping
+- Visual breathing room and consistency
+
+---
+
+### 💊 Medication & Scheduling Flow
+- Day‑based planning
+- Clear upcoming doses
+- Simple, unambiguous actions
+- Low cognitive load by design
+
+---
+
+### 🔔 Notifications Flow
+- Critical alerts are prominent but controlled
+- Warnings remain visible without panic
+- Success messages provide reassurance
+- Technical details available on demand
+
+---
+
+## 🔗 Frontend & Backend Integration
+
+This frontend is fully integrated with a live backend system:
+
+- All UI actions reflect **real backend state**
+- Authentication, medication schedules, notifications, and robot status are live
+- Role‑aware rendering matches backend authorization logic
+- UI state updates accurately reflect system events
+
+The application is deployed end‑to‑end, allowing the entire system to be explored in real time.
+
+---
+
+## 🧱 Frontend Architecture Highlights
+
+- Component‑driven UI design
+- Predictable state management
+- Role‑aware rendering within a single application
+- Consistent visual language across all modules
+- No placeholder or decorative UI — every component is functional
+
+---
+
+## 🏁 Summary
+
+This frontend represents a complete, production‑ready user interface for a complex, real‑world system involving healthcare routines, robotics, and multi‑role users.
+
+The focus throughout the application is **clarity, stability, and trust** — principles reflected in both the UI design and the frontend architecture.
+
+--- 
+
+### 📄 License
+
+This project is proprietary and protected under an All Rights Reserved license.
+
+The source code is provided for viewing and evaluation purposes only as part of a personal portfolio. Any use, reproduction, modification, or distribution without explicit permission from the author is prohibited.
