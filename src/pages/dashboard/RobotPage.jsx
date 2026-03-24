@@ -287,10 +287,12 @@ export function RobotPage() {
                 console.error("[RobotPage] syncOnce failed:", e);
 
                 const msg =
-                    e?.response?.data?.message ||
-                    e?.response?.data?.error ||
-                    e?.message ||
-                    "Failed to load robot data";
+                    e?.response?.status === 401
+                        ? "Unauthorized. Please sign in again."
+                        : e?.response?.data?.message ||
+                        e?.response?.data?.error ||
+                        e?.message ||
+                        "Failed to load robot data";
 
                 setErr(msg);
 
@@ -357,15 +359,21 @@ export function RobotPage() {
     const recent10 = useMemo(() => activities.slice(0, 10), [activities]);
 
     const applyTargetUser = useCallback(async (nextUserId) => {
-        setTargetUserId(String(nextUserId));
-        setRobotId(null);
+        const nextId = String(nextUserId);
+        setTargetUserId(nextId);
+
+        selectionRef.current.targetUserId = nextId;
         selectionRef.current.robotId = null;
+
+        setRobotId(null);
         await syncOnce({ initial: true });
     }, [syncOnce]);
 
     const refreshNow = useCallback(async () => {
         await syncOnce({ initial: false });
     }, [syncOnce]);
+
+    const hasStatus = !!status;
 
     return (
         <div className="space-y-6">
@@ -552,6 +560,8 @@ export function RobotPage() {
             {/* Grid */}
             <div className="grid grid-cols-12 gap-6">
                 {/* Left */}
+                {hasStatus ? (
+                    <>
                 <div className="col-span-12 space-y-6 xl:col-span-7">
                     <RobotDetailsCard status={status} loading={initialLoadingStatus} />
 
@@ -572,6 +582,13 @@ export function RobotPage() {
                     {/* Keep upgraded Operational performance */}
                     <RobotEfficiencyCard activities={activities} loading={initialLoadingActs} />
                 </div>
+                    </>
+    ) : (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+            Robot status is unavailable right now.
+            {err ? <div className="mt-1 font-medium">{err}</div> : null}
+        </div>
+    )}
             </div>
         </div>
     );

@@ -24,17 +24,6 @@ function fmtTime(iso) {
     }
 }
 
-function isRobotStatus(value) {
-    return (
-        value === "RESTING" ||
-        value === "DELIVERING" ||
-        value === "CHARGING" ||
-        value === "MOVING_TO_LOCATION" ||
-        value === "RETURNING_TO_DOCK"
-    );
-}
-
-
 export default function RobotDetailsCard({ status, loading }) {
     const battery = status?.batteryLevel;
     const bKind = batteryKind(battery);
@@ -43,6 +32,10 @@ export default function RobotDetailsCard({ status, loading }) {
     const robotStatusLabel = status?.robotStatus ? labelizeEnum(status.robotStatus) : "—";
     const currentLocationLabel = status?.currentLocation ? labelizeEnum(status.currentLocation) : "—";
     const targetLocationLabel = status?.targetLocation ? labelizeEnum(status.targetLocation) : "—";
+    const trayStatusLabel = status?.trayStatus ? labelizeEnum(status.trayStatus) : "—";
+    const sensorStatusLabel = status?.sensorStatus ? labelizeEnum(status.sensorStatus) : "—";
+    const dispenserStatusLabel = status?.dispenserStatus ? labelizeEnum(status.dispenserStatus) : "—";
+    const dispenserFillLevelLabel = status?.dispenserFillLevel ? labelizeEnum(status.dispenserFillLevel) : "—";
 
     return (
         <div className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur">
@@ -72,23 +65,22 @@ export default function RobotDetailsCard({ status, loading }) {
                             label="Battery level"
                             value={battery != null ? `${battery}%` : "—"}
                             pill={bPill}
-                            subtitle={status?.robotStatus ? labelizeEnum(status.robotStatus) : "—"}
+                            subtitle={robotStatusLabel}
                         />
 
                         <Metric
                             icon={Activity}
                             label="Robot status"
-                            value={labelizeEnum(status.robotStatus).toUpperCase()}
+                            value={robotStatusLabel !== "—" ? robotStatusLabel.toUpperCase() : "—"}
                             pill={pillClass("neutral")}
-                            subtitle={`Target: ${labelizeEnum(status.targetLocation)}`}
+                            subtitle={`Target: ${targetLocationLabel}`}
                             compactValue
                         />
-
 
                         <Metric
                             icon={PackageOpen}
                             label="Tray status"
-                            value={status?.trayStatus ? labelizeEnum(status.trayStatus) : "—"}
+                            value={trayStatusLabel}
                             pill={pillClass(status?.trayStatus === "UP" ? "good" : "warn")}
                             subtitle="Handoff safety system"
                         />
@@ -96,7 +88,7 @@ export default function RobotDetailsCard({ status, loading }) {
                         <Metric
                             icon={Radar}
                             label="Sensor status"
-                            value={status?.sensorStatus ? labelizeEnum(status.sensorStatus) : "—"}
+                            value={sensorStatusLabel}
                             pill={pillClass(status?.sensorStatus === "ON" ? "good" : "warn")}
                             subtitle={status?.sensorMessage || "—"}
                         />
@@ -104,7 +96,7 @@ export default function RobotDetailsCard({ status, loading }) {
                         <Metric
                             icon={Cpu}
                             label="Dispenser status"
-                            value={status?.dispenserStatus ? labelizeEnum(status.dispenserStatus) : "—"}
+                            value={dispenserStatusLabel}
                             pill={pillClass(status?.dispenserStatus === "ON" ? "good" : "warn")}
                             subtitle={
                                 status?.dispenserPillsRemaining != null
@@ -116,9 +108,9 @@ export default function RobotDetailsCard({ status, loading }) {
                         <Metric
                             icon={Cpu}
                             label="Dispenser fill"
-                            value={status?.dispenserFillLevel ? labelizeEnum(status.dispenserFillLevel) : "—"}
+                            value={dispenserFillLevelLabel}
                             pill={pillClass(status?.dispenserFillLevel === "FULL" ? "good" : "warn")}
-                            subtitle={status?.currentLocation ? `Current: ${labelizeEnum(status.currentLocation)}` : "—"}
+                            subtitle={status?.currentLocation ? `Current: ${currentLocationLabel}` : "—"}
                         />
                     </div>
 
@@ -162,8 +154,8 @@ function Metric({ icon: Icon, label, value, pill, subtitle, compactValue = false
                         </p>
 
                         <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${pill}`}>
-              live
-            </span>
+                            live
+                        </span>
                     </div>
 
                     <p className="mt-1 truncate text-xs font-medium text-slate-600">{subtitle}</p>
@@ -172,4 +164,3 @@ function Metric({ icon: Icon, label, value, pill, subtitle, compactValue = false
         </div>
     );
 }
-
