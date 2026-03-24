@@ -284,8 +284,7 @@ export function RobotPage() {
                 setLastSyncAt(new Date());
             } catch (e) {
                 if (!mounted.current) return;
-                console.error("[RobotPage] syncOnce failed:", e);
-
+                console.error("[RobotPage] syncOnce failed:", e)
                 const msg =
                     e?.response?.status === 401
                         ? "Unauthorized. Please sign in again."
@@ -560,8 +559,6 @@ export function RobotPage() {
             {/* Grid */}
             <div className="grid grid-cols-12 gap-6">
                 {/* Left */}
-                {hasStatus ? (
-                    <>
                 <div className="col-span-12 space-y-6 xl:col-span-7">
                     <RobotDetailsCard status={status} loading={initialLoadingStatus} />
 
@@ -582,13 +579,6 @@ export function RobotPage() {
                     {/* Keep upgraded Operational performance */}
                     <RobotEfficiencyCard activities={activities} loading={initialLoadingActs} />
                 </div>
-                    </>
-    ) : (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-            Robot status is unavailable right now.
-            {err ? <div className="mt-1 font-medium">{err}</div> : null}
-        </div>
-    )}
             </div>
         </div>
     );
