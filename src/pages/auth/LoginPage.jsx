@@ -198,10 +198,8 @@ export default function LoginPage() {
                 id: data.id,
                 fullname: data.fullname,
                 username: data.username,
-                email: data.email,              // ✅ include email (if backend returns it)
+                email: data.email,
                 roles: data.roles || [],
-                token,
-                rawJwtToken: data.jwtToken,     // keep if you want debugging
             };
 
             // Persist based on rememberMe
