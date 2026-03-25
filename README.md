@@ -36,6 +36,8 @@ The goal is not visual flash — it is **clarity, trust, and usability**.
 
 ## 🧩 Major Frontend Modules
 
+> Screenshots below demonstrate real application flows and interaction patterns.
+
 ### 🔐 Authentication (Login & Signup)
 - Clean, reassuring authentication flows
 - Real‑time validation with clear feedback
@@ -43,6 +45,7 @@ The goal is not visual flash — it is **clarity, trust, and usability**.
 - Session‑aware and persistent login handling
 - Calm success and error messaging
 
+![Signup Page](./screenshots/signup.png)
 ---
 
 ### 💊 Medication Management
@@ -53,6 +56,7 @@ A core part of the application’s frontend experience.
 - Emphasis on readability and reassurance
 - Card‑based layouts designed to reduce cognitive load
 
+![Medication Page](./screenshots/medicaiton.png)
 ---
 
 ### 🕒 Dose Scheduling & Daily Planning
@@ -61,6 +65,9 @@ A core part of the application’s frontend experience.
 - Visual rhythm (morning / afternoon / night)
 - Status changes that are deliberate and explicit
 
+![Doses Page](./screenshots/doses.png)
+
+![Schedules Page](./screenshots/schedules.png)
 ---
 
 ### 🤖 Robot & Dispenser Awareness
@@ -69,6 +76,7 @@ A core part of the application’s frontend experience.
 - Visual metaphors instead of raw technical data
 - Companion‑like presentation rather than machine‑centric UI
 
+![Robot Page](./screenshots/robot.png)
 ---
 
 ### 🔔 Notifications Center
@@ -79,41 +87,8 @@ A complete **frontend notification inbox**, not a simple alert system.
 - Admin view across multiple users
 - Filtering, pagination, and search
 - Expandable details with optional technical transparency
-
----
-
-## 📸 Screenshots & UI Flows
-
-> Screenshots below demonstrate real application flows and interaction patterns.
-
-### 🧭 Authentication Flow
-- Calm welcome screen
-- Login with gentle validation feedback
-- Signup with password strength guidance
-
----
-
-### 🏠 Dashboard Experience
-- Modular card‑based layout
-- Clear information grouping
-- Visual breathing room and consistency
-
----
-
-### 💊 Medication & Scheduling Flow
-- Day‑based planning
-- Clear upcoming doses
-- Simple, unambiguous actions
-- Low cognitive load by design
-
----
-
-### 🔔 Notifications Flow
-- Critical alerts are prominent but controlled
-- Warnings remain visible without panic
-- Success messages provide reassurance
-- Technical details available on demand
-
+  
+![Notifications Page](./screenshots/notifications.png)
 ---
 
 ## 🔗 Frontend & Backend Integration
