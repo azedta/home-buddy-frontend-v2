@@ -104,6 +104,19 @@ The application is deployed end‑to‑end, allowing the entire system to be exp
 
 ---
 
+## 🧰 Tech Stack (HomeBuddy Frontend)
+
+- ⚛️ **React** (functional components, hooks)
+- ⚡ **Vite** (modern dev server & build tool)
+- 🎨 **Tailwind CSS** (utility-first, design-system driven UI)
+- 🧭 **React Router** (multi-role routing & protected flows)
+- 🧠 **Zustand** (authentication & global state management)
+- 🔌 **Fetch-based API layer** (`apiFetch` abstraction)
+- 🔔 **react-hot-toast** (non-intrusive feedback & alerts)
+- 🧩 **lucide-react** (consistent icon system)
+
+--- 
+
 ## 🧱 Frontend Architecture Highlights
 
 - Component‑driven UI design
